@@ -1,9 +1,11 @@
 # pydacc
 ### Data cleaning and clustering API
 
-[![Deploy](https://button.deta.dev/1/svg)](https://go.deta.dev/deploy?repo=https://github.com/batmanscode/pydacc)
+**To run with docker, clone and build an image**
 
-To run:
+---
+
+To run locally:
 ```bash
 uvicorn api:app
 ```
@@ -12,4 +14,4 @@ And optionally ` --host 0.0.0.0 --port 8080`
 
 For development, using `--reload` will make things a little easier.
 
-**This README is a WIP**
+# This README is a WIP
