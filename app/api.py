@@ -6,7 +6,7 @@ from fastapi.responses import FileResponse, PlainTextResponse
 from starlette.background import BackgroundTask
 import os
 
-from pydacc.clustering import train_clustering_model, automl_clustering, predict_cluster_label
+from app.pydacc.clustering import train_clustering_model, automl_clustering, predict_cluster_label
 
 
 request_example = """
