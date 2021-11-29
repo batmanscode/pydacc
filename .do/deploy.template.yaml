@@ -2,10 +2,9 @@
     name: pydacc
     services:
     - name: pydacc
-      github:
+      git:
         branch: batmanscode-digitalocean-1
-        deploy_on_push: true
-        repo: batmanscode/pydacc
+        repo_clone_url: https://github.com/batmanscode/pydacc.git
       http_port: 8080
       environment_slug: python
       routes:
