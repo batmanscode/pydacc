@@ -1,7 +1,7 @@
 # pydacc
 ### Data cleaning and clustering API
 
-[![Deploy](https://button.deta.dev/1/svg)](https://go.deta.dev/deploy?repo=https://github.com/batmanscode/pydacc)
+[![Deploy to DO](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/batmanscode/pydacc/tree/batmanscode-digitalocean-1)
 
 To run:
 ```bash
