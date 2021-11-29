@@ -1,12 +1,12 @@
-name: pydacc
-services:
-- environment_slug: python
-  github:
-    branch: batmanscode-digitalocean-1
-    deploy_on_push: true
-    repo: batmanscode/pydacc
-  http_port: 8080
   name: pydacc
-  routes:
-  - path: /
-  run_command: gunicorn --worker-tmp-dir /dev/shm --config gunicorn.conf.py api:app
+  services:
+  - name: pydacc
+    github:
+      branch: batmanscode-digitalocean-1
+      deploy_on_push: true
+      repo: batmanscode/pydacc
+    http_port: 8080
+    environment_slug: python
+    routes:
+    - path: /
+    run_command: gunicorn --worker-tmp-dir /dev/shm --config gunicorn.conf.py api:app
