@@ -5,8 +5,8 @@ from fastapi import FastAPI, File, Query, UploadFile, Form, BackgroundTasks
 from fastapi.responses import FileResponse, PlainTextResponse
 from starlette.background import BackgroundTask
 import os
-
-from pydacc.clustering import train_clustering_model, automl_clustering, predict_cluster_label
+from datetime import date
+from pydacc.clustering import train_clustering_model, automl_clustering, predict_cluster_label , assign_cluster_labels
 
 
 request_example = """
