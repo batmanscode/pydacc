@@ -8,6 +8,8 @@ import os
 from datetime import date
 from pydacc.clustering import train_clustering_model, automl_clustering, predict_cluster_label , assign_cluster_labels
 
+from fastapi.middleware.cors import CORSMiddleware # temp for cors
+
 
 request_example = """
 ### How to make a request to the API and download the output CSV:
@@ -47,6 +49,17 @@ else:
 
 app = FastAPI(
     title="AutoML 🤖: Clustering", description=request_example, version="1.0.0"
+)
+
+# TEMP FOR CORS
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
