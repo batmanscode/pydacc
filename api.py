@@ -6,6 +6,8 @@ from fastapi.responses import FileResponse, PlainTextResponse
 from starlette.background import BackgroundTask
 import os
 
+from fastapi.middleware.cors import CORSMiddleware # temp for cors
+
 from pydacc.clustering import train_clustering_model, automl_clustering, predict_cluster_label
 
 
@@ -47,6 +49,17 @@ else:
 
 app = FastAPI(
     title="AutoML 🤖: Clustering", description=request_example, version="1.0.0"
+)
+
+# TEMP FOR CORS
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
