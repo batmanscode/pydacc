@@ -13,6 +13,7 @@ def clean_data(
     >>> data = clean_data('raw_data.csv', drop_threshold=0.9)
 
     path_to_csv: str
+      Path to a '.csv` file. Alternatively, can be passed in as a string
 
     drop_columns: str, list, default=None
       Columns that aren't needed.
@@ -26,8 +27,14 @@ def clean_data(
 
     import pandas as pd
     import klib
+    from io import StringIO
 
-    df = pd.read_csv(path_to_csv)
+    try:
+        df = pd.read_csv(path_to_csv)
+    except:
+        df = pd.read_csv(StringIO(path_to_csv), sep =",")
+    else:
+        raise ValueError("data passed must be in a CSV format. Either as a '.csv' file or a string")
 
     # drop named columns
     if drop_columns:
