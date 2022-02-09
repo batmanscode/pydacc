@@ -100,6 +100,8 @@ Note: add "/docs" to the url to get the swagger ui docs or "/redoc"
 
 # for each parameter
 # having them here since they share most of it
+path_to_csv_doc = "Path to a `.csv` file. Alternatively, can be sent as a string"
+
 k_doc = "number of clusters to create"
 
 column_drop_threshold_doc = """
@@ -140,7 +142,7 @@ Calls the `train_clustering_model` internally.
 @app.post("/clustering/", description=clustering_doc)
 def clustering(
     background_tasks: BackgroundTasks,
-    path_to_csv: UploadFile = File(...),
+    path_to_csv: UploadFile = File(..., description=path_to_csv_doc),
     k: int = Form(..., description=k_doc),
     column_drop_threshold: float = Form(0.99, description=column_drop_threshold_doc),
     file_name: str = Form("cluster_model", description=file_name_doc),
@@ -188,7 +190,7 @@ def clustering(
 @app.post("/auto-clustering/", description=auto_clustering_doc)
 def auto_clustering(
     background_tasks: BackgroundTasks,
-    path_to_csv: UploadFile = File(...),
+    path_to_csv: UploadFile = File(..., description=path_to_csv_doc),
     column_drop_threshold: float = Form(0.99, description=column_drop_threshold_doc),
     file_name: str = Form("cluster_model", description=file_name_doc),
     drop_columns: List[str] = Form(None, description=drop_columns_doc),
