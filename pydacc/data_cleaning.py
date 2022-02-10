@@ -27,14 +27,12 @@ def clean_data(
 
     import pandas as pd
     import klib
-    from io import StringIO
 
-    try:
-        df = pd.read_csv(path_to_csv)
-    except:
-        df = pd.read_csv(StringIO(path_to_csv), sep =",")
-    else:
-        raise ValueError("data passed must be in a CSV format. Either as a '.csv' file or a string")
+    df = pd.read_csv(path_to_csv)
+    
+    # check if converted to dataframe
+    if not isinstance(df, pd.DataFrame):
+        raise ValueError("data passed couldn't be converted to a Pandas Dataframe")
 
     # drop named columns
     if drop_columns:
