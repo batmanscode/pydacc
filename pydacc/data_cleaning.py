@@ -13,7 +13,7 @@ def clean_data(
     >>> data = clean_data('raw_data.csv', drop_threshold=0.9)
 
     path_to_csv: str
-      Path to a '.csv` file. Alternatively, can be passed in as a string
+      Path to a '.csv` file.
 
     drop_columns: str, list, default=None
       Columns that aren't needed.
