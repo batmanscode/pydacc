@@ -3,6 +3,7 @@ from typing import List, Optional
 import pandas as pd
 from fastapi import FastAPI, File, Query, UploadFile, Form, BackgroundTasks
 from fastapi.responses import FileResponse, PlainTextResponse
+from pydantic import Field
 from starlette.background import BackgroundTask
 import os
 from datetime import date
@@ -232,15 +233,15 @@ def auto_clustering(
 @app.post("/clustering-csv-string", summary="Same as `clustering` but takes the CSV as a string instead of a file", description=clustering_csv_string_doc)
 def clustering_csv_string(
     background_tasks: BackgroundTasks,
-    csv_string: str = Query(..., description=csv_string_doc),
-    k: int = Query(..., description=k_doc),
-    column_drop_threshold: float = Query(0.99, description=column_drop_threshold_doc),
-    file_name: str = Query("cluster_model", description=file_name_doc),
-    drop_columns: Optional[List[str]] = Query(None, description=drop_columns_doc),
-    categorical_columns: Optional[List[str]] = Query(None, description=categorical_columns_doc),
-    numerical_columns: Optional[List[str]] = Query(None, description=numerical_columns_doc),
-    ignore_features: Optional[List[str]] = Query(None, description=ignore_features_doc),
-    output_format: str = Query("csv", description=output_format_doc),
+    csv_string: str = Field(..., description=csv_string_doc),
+    k: int = Field(..., description=k_doc),
+    column_drop_threshold: float = Field(0.99, description=column_drop_threshold_doc),
+    file_name: str = Field("cluster_model", description=file_name_doc),
+    drop_columns: Optional[List[str]] = Field(None, description=drop_columns_doc),
+    categorical_columns: Optional[List[str]] = Field(None, description=categorical_columns_doc),
+    numerical_columns: Optional[List[str]] = Field(None, description=numerical_columns_doc),
+    ignore_features: Optional[List[str]] = Field(None, description=ignore_features_doc),
+    output_format: str = Field("csv", description=output_format_doc),
 ):
 
     # trained model
@@ -278,14 +279,14 @@ def clustering_csv_string(
 @app.post("/auto-clustering-csv-string", summary="Same as `auto-clustering` but takes the CSV as a string instead of a file", description=auto_clustering_doc)
 def auto_clustering_csv_string(
     background_tasks: BackgroundTasks,
-    csv_string: str = Query(..., description=csv_string_doc),
-    column_drop_threshold: float = Query(0.99, description=column_drop_threshold_doc),
-    file_name: str = Query("cluster_model", description=file_name_doc),
-    drop_columns: Optional[List[str]] = Query(None, description=drop_columns_doc),
-    categorical_columns: Optional[List[str]] = Query(None, description=categorical_columns_doc),
-    numerical_columns: Optional[List[str]] = Query(None, description=numerical_columns_doc),
-    ignore_features: Optional[List[str]] = Query(None, description=ignore_features_doc),
-    output_format: str = Query("csv", description=output_format_doc),
+    csv_string: str = Field(..., description=csv_string_doc),
+    column_drop_threshold: float = Field(0.99, description=column_drop_threshold_doc),
+    file_name: str = Field("cluster_model", description=file_name_doc),
+    drop_columns: Optional[List[str]] = Field(None, description=drop_columns_doc),
+    categorical_columns: Optional[List[str]] = Field(None, description=categorical_columns_doc),
+    numerical_columns: Optional[List[str]] = Field(None, description=numerical_columns_doc),
+    ignore_features: Optional[List[str]] = Field(None, description=ignore_features_doc),
+    output_format: str = Field("csv", description=output_format_doc),
 ):
 
     automl_clustering(
