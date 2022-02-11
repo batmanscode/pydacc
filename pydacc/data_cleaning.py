@@ -27,8 +27,26 @@ def clean_data(
 
     import pandas as pd
     import klib
+    from io import StringIO
+    
+#     # if the csv input is a string, wrap in the StringIO function
+#     if isinstance(path_to_csv, str):
+#         try:
+#             path_to_csv = StringIO(path_to_csv)
+#         except:
+#             raise ValueError("you sent a weird string that couldn't be parsed by StringIO")
+#     else:
+#         pass
 
-    df = pd.read_csv(path_to_csv)
+#     df = pd.read_csv(path_to_csv)
+    
+    # take csv input from string or file and convert to pandas dataframe
+    try:
+        df = pd.read_csv(path_to_csv)
+        print("Pandas Dataframe created from a CSV file")
+    except:
+        df = pd.read_csv(StringIO(path_to_csv))
+        print("Pandas Dataframe created from a CSV string")
     
     # check if converted to dataframe
     if not isinstance(df, pd.DataFrame):
