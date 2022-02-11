@@ -123,7 +123,7 @@ A unique id column for example would make searching clusters easier but wouldn't
 
 output_format_doc = "'csv' or 'json'"
 
-csv_string_doc = "CSV as a string"
+csv_string_doc = "CSV as a string. Requires tripple quotes to preserve line breaks"
 
 # functions
 clustering_doc = """Reads a csv file into a Pandas Dataframe obeject and creates a kmeans clustering model. Calls `data_cleaning` and `get_common_items` internally.
@@ -148,7 +148,7 @@ Except for `csv_string` and `k`, all other params are optional.
 """
 
 
-@app.post("/clustering/", description=clustering_doc)
+@app.post("/clustering", description=clustering_doc)
 def clustering(
     background_tasks: BackgroundTasks,
     path_to_csv: UploadFile = File(..., description=path_to_csv_doc),
@@ -196,7 +196,7 @@ def clustering(
     return FileResponse(cluster_labels, background=BackgroundTask(delete_temp))
 
 
-@app.post("/auto-clustering/", description=auto_clustering_doc)
+@app.post("/auto-clustering", description=auto_clustering_doc)
 def auto_clustering(
     background_tasks: BackgroundTasks,
     path_to_csv: UploadFile = File(..., description=path_to_csv_doc),
@@ -242,7 +242,7 @@ def auto_clustering(
 
 
 # end points that can take strings instead of files
-@app.post("/clustering-csv-string/", summary="Same as `clustering` but takes the CSV as a string instead of a file", description=clustering_csv_string_doc)
+@app.post("/clustering-csv-string", summary="Same as `clustering` but takes the CSV as a string instead of a file", description=clustering_csv_string_doc)
 def clustering_csv_string(
     background_tasks: BackgroundTasks,
     csv_string: str = Query(..., description=csv_string_doc),
@@ -288,7 +288,7 @@ def clustering_csv_string(
     return FileResponse(cluster_labels, background=BackgroundTask(delete_temp))
 
 
-@app.post("/auto-clustering-csv-string/", summary="Same as `auto-clustering` but takes the CSV as a string instead of a file", description=auto_clustering_doc)
+@app.post("/auto-clustering-csv-string", summary="Same as `auto-clustering` but takes the CSV as a string instead of a file", description=auto_clustering_doc)
 def auto_clustering_csv_string(
     background_tasks: BackgroundTasks,
     csv_string: str = Query(..., description=csv_string_doc),
