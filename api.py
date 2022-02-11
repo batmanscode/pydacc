@@ -110,7 +110,7 @@ A unique id column for example would make searching clusters easier but wouldn't
 
 output_format_doc = "'csv' or 'json'"
 
-csv_string_doc = "CSV as a string"
+csv_string_doc = "CSV as a string. Requires tripple quotes to preserve line breaks"
 
 # functions
 clustering_doc = """Reads a csv file into a Pandas Dataframe obeject and creates a kmeans clustering model. Calls `data_cleaning` and `get_common_items` internally.
