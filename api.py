@@ -243,18 +243,21 @@ def auto_clustering(
 
 
 # end points that can take strings instead of files
+class ClusteringString(BaseModel):
+    csv_string: str = Field(..., description=csv_string_doc)
+    k: int = Field(..., description=k_doc)
+    column_drop_threshold: float = Field(0.99, description=column_drop_threshold_doc)
+    file_name: str = Field("cluster_model", description=file_name_doc)
+    drop_columns: Optional[List[str]] = Field(None, description=drop_columns_doc)
+    categorical_columns: Optional[List[str]] = Field(None, description=categorical_columns_doc)
+    numerical_columns: Optional[List[str]] = Field(None, description=numerical_columns_doc)
+    ignore_features: Optional[List[str]] = Field(None, description=ignore_features_doc)
+    output_format: str = Field("csv", description=output_format_doc)
+
 @app.post("/clustering-csv-string", summary="Same as `clustering` but takes the CSV as a string instead of a file", description=clustering_csv_string_doc)
 def clustering_csv_string(
     background_tasks: BackgroundTasks,
-    csv_string: str = Field(..., description=csv_string_doc),
-    k: int = Field(..., description=k_doc),
-    column_drop_threshold: float = Field(0.99, description=column_drop_threshold_doc),
-    file_name: str = Field("cluster_model", description=file_name_doc),
-    drop_columns: Optional[List[str]] = Field(None, description=drop_columns_doc),
-    categorical_columns: Optional[List[str]] = Field(None, description=categorical_columns_doc),
-    numerical_columns: Optional[List[str]] = Field(None, description=numerical_columns_doc),
-    ignore_features: Optional[List[str]] = Field(None, description=ignore_features_doc),
-    output_format: str = Field("csv", description=output_format_doc),
+    clustering_string: ClusteringString = Body(..., embed=True),
 ):
 
     # trained model
