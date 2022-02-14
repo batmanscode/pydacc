@@ -3,7 +3,7 @@ from typing import List, Optional
 import pandas as pd
 from fastapi import FastAPI, File, Query, UploadFile, Form, BackgroundTasks
 from fastapi.responses import FileResponse, PlainTextResponse
-from pydantic import Field
+from pydantic import BaseModel, Field
 from starlette.background import BackgroundTask
 import os
 from datetime import date
@@ -276,9 +276,7 @@ def clustering_csv_string(
     return FileResponse(cluster_labels, background=BackgroundTask(delete_temp))
 
 
-@app.post("/auto-clustering-csv-string", summary="Same as `auto-clustering` but takes the CSV as a string instead of a file", description=auto_clustering_doc)
-def auto_clustering_csv_string(
-    background_tasks: BackgroundTasks,
+class AutoClusteringString(BaseModel):
     csv_string: str = Field(..., description=csv_string_doc),
     column_drop_threshold: float = Field(0.99, description=column_drop_threshold_doc),
     file_name: str = Field("cluster_model", description=file_name_doc),
@@ -286,7 +284,12 @@ def auto_clustering_csv_string(
     categorical_columns: Optional[List[str]] = Field(None, description=categorical_columns_doc),
     numerical_columns: Optional[List[str]] = Field(None, description=numerical_columns_doc),
     ignore_features: Optional[List[str]] = Field(None, description=ignore_features_doc),
-    output_format: str = Field("csv", description=output_format_doc),
+    output_format: str = Field("csv", description=output_format_doc)
+
+@app.post("/auto-clustering-csv-string", summary="Same as `auto-clustering` but takes the CSV as a string instead of a file", description=auto_clustering_doc)
+def auto_clustering_csv_string(
+    background_tasks: BackgroundTasks,
+    auto_clustering_string: AutoClusteringString = Body(..., embed=True),
 ):
 
     automl_clustering(
