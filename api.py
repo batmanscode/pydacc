@@ -1,12 +1,15 @@
 import shutil
-from typing import List
+from typing import List, Optional
 import pandas as pd
-from fastapi import FastAPI, File, Query, UploadFile, Form, BackgroundTasks
+from fastapi import FastAPI, File, Query, UploadFile, Form, BackgroundTasks, Body
 from fastapi.responses import FileResponse, PlainTextResponse
+from pydantic import BaseModel, Field
 from starlette.background import BackgroundTask
 import os
+from datetime import date
+from pydacc.clustering import train_clustering_model, automl_clustering, predict_cluster_label , assign_cluster_labels
 
-from pydacc.clustering import train_clustering_model, automl_clustering, predict_cluster_label
+from fastapi.middleware.cors import CORSMiddleware # temp for cors
 
 
 request_example = """
@@ -49,6 +52,17 @@ app = FastAPI(
     title="AutoML 🤖: Clustering", description=request_example, version="1.0.0"
 )
 
+# TEMP FOR CORS
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 def save_to_disk(uploaded_file):
     """
@@ -87,6 +101,8 @@ Note: add "/docs" to the url to get the swagger ui docs or "/redoc"
 
 # for each parameter
 # having them here since they share most of it
+path_to_csv_doc = "Path to a `.csv` file. Alternatively, can be sent as a string"
+
 k_doc = "number of clusters to create"
 
 column_drop_threshold_doc = """
@@ -124,17 +140,17 @@ Calls the `train_clustering_model` internally.
 """
 
 
-@app.post("/clustering/", description=clustering_doc)
+@app.post("/clustering", description=clustering_doc)
 def clustering(
     background_tasks: BackgroundTasks,
-    path_to_csv: UploadFile = File(...),
+    path_to_csv: UploadFile = File(..., description=path_to_csv_doc),
     k: int = Form(..., description=k_doc),
     column_drop_threshold: float = Form(0.99, description=column_drop_threshold_doc),
     file_name: str = Form("cluster_model", description=file_name_doc),
-    drop_columns: List[str] = Form(None, description=drop_columns_doc),
-    categorical_columns: List[str] = Form(None, description=categorical_columns_doc),
-    numerical_columns: List[str] = Form(None, description=numerical_columns_doc),
-    ignore_features: List[str] = Form(None, description=ignore_features_doc),
+    drop_columns: Optional[List[str]] = Form(None, description=drop_columns_doc),
+    categorical_columns: Optional[List[str]] = Form(None, description=categorical_columns_doc),
+    numerical_columns: Optional[List[str]] = Form(None, description=numerical_columns_doc),
+    ignore_features: Optional[List[str]] = Form(None, description=ignore_features_doc),
     output_format: str = Form("csv", description=output_format_doc),
 ):
 
@@ -172,16 +188,16 @@ def clustering(
     return FileResponse(cluster_labels, background=BackgroundTask(delete_temp))
 
 
-@app.post("/auto-clustering/", description=auto_clustering_doc)
+@app.post("/auto-clustering", description=auto_clustering_doc)
 def auto_clustering(
     background_tasks: BackgroundTasks,
-    path_to_csv: UploadFile = File(...),
+    path_to_csv: UploadFile = File(..., description=path_to_csv_doc),
     column_drop_threshold: float = Form(0.99, description=column_drop_threshold_doc),
     file_name: str = Form("cluster_model", description=file_name_doc),
-    drop_columns: List[str] = Form(None, description=drop_columns_doc),
-    categorical_columns: List[str] = Form(None, description=categorical_columns_doc),
-    numerical_columns: List[str] = Form(None, description=numerical_columns_doc),
-    ignore_features: List[str] = Form(None, description=ignore_features_doc),
+    drop_columns: Optional[List[str]] = Form(None, description=drop_columns_doc),
+    categorical_columns: Optional[List[str]] = Form(None, description=categorical_columns_doc),
+    numerical_columns: Optional[List[str]] = Form(None, description=numerical_columns_doc),
+    ignore_features: Optional[List[str]] = Form(None, description=ignore_features_doc),
     output_format: str = Form("csv", description=output_format_doc),
 ):
 
