@@ -147,10 +147,10 @@ def clustering(
     k: int = Form(..., description=k_doc),
     column_drop_threshold: float = Form(0.99, description=column_drop_threshold_doc),
     file_name: str = Form("cluster_model", description=file_name_doc),
-    drop_columns: Optional[List[str]] | None = Form(None, description=drop_columns_doc),
-    categorical_columns: Optional[List[str]] | None = Form(None, description=categorical_columns_doc),
-    numerical_columns: Optional[List[str]] | None = Form(None, description=numerical_columns_doc),
-    ignore_features: Optional[List[str]] | None = Form(None, description=ignore_features_doc),
+    drop_columns: Optional[List[str] | None] = Form(None, description=drop_columns_doc),
+    categorical_columns: Optional[List[str] | None] | = Form(None, description=categorical_columns_doc),
+    numerical_columns: Optional[List[str] | None] | = Form(None, description=numerical_columns_doc),
+    ignore_features: Optional[List[str] | None] | = Form(None, description=ignore_features_doc),
     output_format: str = Form("csv", description=output_format_doc),
 ):
 
@@ -194,10 +194,10 @@ def auto_clustering(
     path_to_csv: UploadFile = File(..., description=path_to_csv_doc),
     column_drop_threshold: float = Form(0.99, description=column_drop_threshold_doc),
     file_name: str = Form("cluster_model", description=file_name_doc),
-    drop_columns: Optional[List[str]] | None = Form(None, description=drop_columns_doc),
-    categorical_columns: Optional[List[str]] | None = Form(None, description=categorical_columns_doc),
-    numerical_columns: Optional[List[str]] | None = Form(None, description=numerical_columns_doc),
-    ignore_features: Optional[List[str]] | None = Form(None, description=ignore_features_doc),
+    drop_columns: Optional[List[str] | None] | = Form(None, description=drop_columns_doc),
+    categorical_columns: Optional[List[str] | None] | = Form(None, description=categorical_columns_doc),
+    numerical_columns: Optional[List[str] | None] | = Form(None, description=numerical_columns_doc),
+    ignore_features: Optional[List[str] | None] | = Form(None, description=ignore_features_doc),
     output_format: str = Form("csv", description=output_format_doc),
 ):
 
