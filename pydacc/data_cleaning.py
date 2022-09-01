@@ -82,6 +82,7 @@ def clean_data(
 def get_common_items(list1, list2):
     """
     Compares two lists and returns the common items in a new list. Used internally.
+    If one of the lists is `None` it will return `None` instead of trying to iterate through eeach. This prevents the `TypeError: argument of type 'NoneType' is not iterable` error.
 
     Example
     -------
@@ -95,5 +96,8 @@ def get_common_items(list1, list2):
 
     returns: list
     """
-    common = [value for value in list1 if value in list2]
-    return common
+    if list1 or list2 is None:
+        return None
+    else:
+        common = [value for value in list1 if value in list2]
+        return common
