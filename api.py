@@ -124,8 +124,6 @@ A unique id column for example would make searching clusters easier but wouldn't
 
 output_format_doc = "'csv' or 'json'"
 
-csv_string_doc = "CSV as a string. Requires tripple quotes to preserve line breaks"
-
 # functions
 clustering_doc = """Reads a csv file into a Pandas Dataframe obeject and creates a kmeans clustering model. Calls `data_cleaning` and `get_common_items` internally.
 
@@ -137,13 +135,6 @@ Except for `path_to_csv` and `k`, all other params are optional.
 auto_clustering_doc = """Automatically finds the best k by iterating through values of k and selecting the one with the best silhouette coefficient. Not always the best but usually good enough.
 
 Calls the `train_clustering_model` internally.
-
-**Returns:** a CSV with labels added to the input data after creating a model
-"""
-
-clustering_csv_string_doc = """Reads a csv string into a Pandas Dataframe obeject and creates a kmeans clustering model. Calls `data_cleaning` and `get_common_items` internally.
-
-Except for `csv_string` and `k`, all other params are optional.
 
 **Returns:** a CSV with labels added to the input data after creating a model
 """
