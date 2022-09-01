@@ -1,8 +1,14 @@
 # pydacc
 ### Data cleaning and clustering API
 
+Demo: https://pydacc-production.up.railway.app
+
 
 To run locally:
+```bash
+git clone https://github.com/batmanscode/pydacc.git
+```
+
 ```bash
 uvicorn api:app
 ```
