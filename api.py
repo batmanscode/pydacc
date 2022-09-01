@@ -1,5 +1,5 @@
 import shutil
-from typing import List, Optional
+from typing import List, Optional, Union
 import pandas as pd
 from fastapi import FastAPI, File, Query, UploadFile, Form, BackgroundTasks, Body
 from fastapi.responses import FileResponse, PlainTextResponse
