@@ -55,6 +55,8 @@ def clean_data(
     # drop named columns
     if drop_columns:
         df.drop(columns=drop_columns, inplace=True)
+        print(f"Dropped columns: {drop_colums}")
+        print(f"Shape after dropping columns: {df.shape}")
 
     # drop columns with a missing values threshold
     if column_drop_threshold:
@@ -63,6 +65,7 @@ def clean_data(
             thresh=(1 - column_drop_threshold) * df.shape[0],
             inplace=True,
         )
+        print(f"Shape after column_drop_threshold: {df.shape}")
 
     # drop NaN values from remaining data
     df.dropna(axis="index", inplace=True)
