@@ -61,7 +61,7 @@ def train_clustering_model(
 
     # data = pd.read_csv(path_to_csv)
     data, features = clean_data(
-        path_to_csv, column_drop_threshold=column_drop_threshold
+        path_to_csv, column_drop_threshold=column_drop_threshold, drop_columns=drop_columns
     )
 
     # get_common_itemss() will use features left from data cleaning to filter out the dataframe
