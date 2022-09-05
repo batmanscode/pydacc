@@ -55,7 +55,7 @@ def clean_data(
     # drop named columns
     if drop_columns:
         df.drop(columns=drop_columns, inplace=True)
-        print(f"Dropped columns: {drop_colums}")
+        print(f"Dropped columns: {drop_columns}")
         print(f"Shape after dropping columns: {df.shape}")
 
     # drop columns with a missing values threshold
