@@ -50,7 +50,7 @@ Same as **Clustering** but the number of groups are automatically decided.
 > Links to relevant issues:
 > * [Using "parameter: List[str] = Form(...)" produces unusable Swagger #1700](https://github.com/tiangolo/fastapi/issues/1700)
 > * [form, swagger and Lists #2865](https://github.com/tiangolo/fastapi/issues/2865)
-> * [set type hint Optional\[List[str\]\], but receive value as ['a,b,c'\], not ['a', 'b', 'c'\] #2960](https://github.com/tiangolo/fastapi/issues/2960)
+> * [set type hint Optional\[List\[str\]\], but receive value as \['a,b,c'\], not \['a', 'b', 'c'\] #2960](https://github.com/tiangolo/fastapi/issues/2960)
 
 
 ### Python:
@@ -101,24 +101,24 @@ df
 
 ### Curl:
 ```curl
-curl -X 'POST' \
-  'https://pydacc-production.up.railway.app/auto-clustering' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: multipart/form-data' \
-  -F 'path_to_csv=@example.csv;type=text/csv' \
-  -F 'column_drop_threshold=0.99' \
-  -F 'file_name=cluster_model' \
-  -F 'drop_columns=category' \
-  -F 'drop_columns=account_code' \
-  -F 'categorical_columns=city' \
-  -F 'numerical_columns=TotalOrderCount' \
-  -F 'numerical_columns=TotalOrderValue' \
-  -F 'numerical_columns=outstanding_debt' \
-  -F 'numerical_columns=TotalReturnedValue' \
-  -F 'numerical_columns=TotalReturnedQty' \
-  -F 'numerical_columns=TotalStock' \
-  -F 'ignore_features=id' \
-  -F 'ignore_features=name' \
+curl -X 'POST' \  
+  'https://pydacc-production.up.railway.app/auto-clustering' \  
+  -H 'accept: application/json' \  
+  -H 'Content-Type: multipart/form-data' \  
+  -F 'path_to_csv=@example.csv;type=text/csv' \  
+  -F 'column_drop_threshold=0.99' \  
+  -F 'file_name=cluster_model' \  
+  -F 'drop_columns=category' \  
+  -F 'drop_columns=account_code' \  
+  -F 'categorical_columns=city' \  
+  -F 'numerical_columns=TotalOrderCount' \  
+  -F 'numerical_columns=TotalOrderValue' \  
+  -F 'numerical_columns=outstanding_debt' \  
+  -F 'numerical_columns=TotalReturnedValue' \  
+  -F 'numerical_columns=TotalReturnedQty' \  
+  -F 'numerical_columns=TotalStock' \  
+  -F 'ignore_features=id' \  
+  -F 'ignore_features=name' \  
   -F 'output_format=csv'
 ```
 """
