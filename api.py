@@ -18,7 +18,7 @@ description = """
 Upload a CSV, it\'ll clean then sort your data into clusters and send it back with a new column that has cluster labels.
 
 
->For example, this:
+For example, this:
 >
 >Item | Type
 >---|---
@@ -27,7 +27,7 @@ Upload a CSV, it\'ll clean then sort your data into clusters and send it back wi
 >Cat | Fren
 >Kodiak bear | Fren
 >
->Will get sent back to you as this:
+Will get sent back to you as this:
 >
 >Item | Type |Cluster
 >---|---|---
