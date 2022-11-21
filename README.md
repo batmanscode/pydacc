@@ -29,6 +29,8 @@ Will get sent back to you as this:
 
 Demo and docs: https://pydacc-production.up.railway.app
 
+Note: demo is using railway's free plan so might not always be available
+
 ## `clustering`
 
 Clusters your data based on how many groups you want. This is set by the `k` parameter.
